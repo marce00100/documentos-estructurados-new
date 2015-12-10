@@ -1,0 +1,66 @@
+<div>
+    <div style="margin: 10px 0" class="row">
+        <div class="col-md-1 col-xs-1" style="padding:0" ng-include="'forms/menu2.html'">
+        </div>
+        <div class="col-md-8 col-xs-7">
+            <input ng-model="contexto.nombre" placeholder="Plantilla sin nombre" style="width: 100%; font-size: 18pt; font-style: italic; ">
+
+        </div>
+        <div class="list-group-item col-md-3 col-xs-4">
+            Plantilla vigente  
+            <div class="material-switch pull-right">
+                <input id="someSwitchOptionSuccess" name="someSwitchOption001" type="checkbox" ng-model="contexto.vigente" ng-true-value="1" ng-false-value="0"/>
+                <label for="someSwitchOptionSuccess" class="label-success"></label>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div id="contenidoPlantilla" class="container">
+            <h3 class="bg-success" style="padding: 5px 10px">Contenido:</h3>
+            <table>
+                <tr>
+                    <td>
+                        <h4 style="padding: 0 20px; margin: 0px "><small>Opciones</small></h4>  
+                    </td>
+                    <td>
+                        <h4 style="padding: 0 20px; margin: 0px "><small>Editor markDown</small></h4> 
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">
+                        <!--                  OPCIONES                      -->
+                        <div class="bg-info" style="border: 1px gray solid;  padding: 10px;  ">
+                            <div    align="center">
+                                <div style="border: 1px gray solid; background-color: white; margin:  15px 0px; cursor: pointer" >
+                                    <span class="glyphicon glyphicon-font  btn-lg" ng-click='insertarCodigo("1")' style="padding:0px 10px; font-size:35px; "> <a></a></span>
+                                </div>
+                                <div style="border: 1px gray solid; background-color: white; margin:  15px 0px; cursor: pointer">
+                                    <span class="glyphicon glyphicon-edit   btn-lg" ng-click='insertarCodigo("2")' style="padding:0 10px; font-size:45px"></span>
+                                </div>
+                                <div style="border: 1px gray solid; background-color: white; margin:  15px 0px; cursor: pointer" >
+                                    <span class="glyphicon glyphicon-link btn-lg" style="padding:0 10px; font-size:35px"></span>
+                                </div>
+                            </div> 
+                        </div>
+                    </td>
+                    <td>
+                        <!-- -----------------------------------EDITOR --------------------------------------------->
+                        <textarea id="txtMdContenido"  ng-model="contexto.contenido" markitup="markupSettings" class="markitup " style="  height:8cm;"></textarea>
+                        <button ng-click="contexto.contenido = ''" class="glyphicon glyphicon-unchecked  btn-info btn"> <span>Limpiar</span></button> 
+                        <h4><small>Previsualización</small></h4>
+                        <div id="txtHtmlPlantilla" class="txtPrevisualizacion" marked="contexto.contenido" style="width:21.6cm;  height:8cm; overflow:auto; border:1px solid gray; ">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="row">
+                <h4><small>Descripción:</small></h4>
+                <p><textarea ng-model="contexto.descripcion" placeholder="descripción" style="width:60%; height:50px;"></textarea></p>
+            </div>
+        </div>
+        <button ng-click="guardar()" class="btn btn-success glyphicon glyphicon-ok"> <span>Guardar</span></button> 
+        <a href="#/plantillas" class="btn btn-primary glyphicon glyphicon-home"> <span>Volver al inicio</span></a>
+    </div>
+
+</div>

@@ -1,0 +1,33 @@
+
+<div class="container">
+    <div >
+        <br>
+
+        <a href="#/documentos/nuevo" class="btn btn-success glyphicon glyphicon-plus" > <span>Nuevo Documento</span></a>
+
+        <div class="table-responsive">
+            <table id="tblDocumentos" class="table table-hover" > 
+                <thead>
+                    <tr>                        
+                        <th>Documentos</th>
+                        <th>Descripción</th>
+                        <th>Plantilla base</th>
+                        <th>Creado por</th>
+                        <th>Ultima modificación</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in lista"> 
+                        <td><b><a  href="#/documentos/editar/{{item._id}}">{{item.nombre}}</a></b></td>
+                        <td>{{item.descripcion}}</td>
+                        <td>{{item.plantilla_nombre}}</td>                        
+                        <td>{{item.usuario_creacion}}<br>{{item.fecha_creacion}}</td>
+                        <td>{{item.fecha_modificacion}}</td>
+                        <td><a href="#/documentos/editar/{{item._id}}" class="glyphicon glyphicon-pencil" ></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

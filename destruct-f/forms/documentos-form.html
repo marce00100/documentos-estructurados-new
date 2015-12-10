@@ -1,0 +1,43 @@
+<div>
+    <div style="margin: 10px 0" class="row">
+        <div class="col-md-1 col-xs-1" style="padding:0" ng-include="'forms/menu2.html'">            
+        </div>
+        <div class="col-md-6 col-xs-7">
+            <input ng-model="contexto.nombre" placeholder="Documento sin nombre" style="width: 100%; font-size: 18pt; font-style: italic; ">
+        </div>
+        <div class="list-group-item col-md-5 col-xs-4">
+            Plantilla base:  
+            <select ng-show="contexto._id == null" ng-model="contexto.plantillaObjeto" ng-change="cargarPlantilla()" ng-options="{_id : item._id, nombre : item.nombre} as item.nombre for item in plantillasVigentes">
+                <option value="">- Seleccione una plantilla -</option>
+            </select>
+            <span ng-hide="contexto._id == null" style="font-size: 14pt"> {{contexto.plantilla_nombre}}</span>
+        </div>
+    </div>
+
+    <div>
+        <div id="contenidoDocumento" class="container">
+            <div class="row">
+                <h3 class="bg-success" style="padding: 5px 10px">Documentos:</h3>
+            </div>
+            <div class="row">
+
+                <div id="editorDocumento" class="txtEditor"  bind-html-compile="contexto.plantilla_contenidoHtml" style="width:21.6cm;  height:8cm; overflow:auto; border:1px solid gray; ">
+                </div>
+
+                <a class="glyphicon glyphicon-unchecked  btn-info btn" ng-click="limpiar()"> <span> Limpiar</span></a>
+                <button class="glyphicon glyphicon-eye-open  btn-info btn" ng-click="divPrevisualizacion = adecuarParaVisualizar(contexto.plantilla_contenido);"> <span>Visualizar</span></button>
+                <div id="txtHtmlDocumento" class="txtPrevisualizacion" marked="divPrevisualizacion" style="width:21.6cm;  height:8cm; overflow:auto; border:1px solid gray; ">
+                </div>
+            </div>
+
+            <h4><small>Descripción del documento:</small></h4>
+            <p><textarea ng-model="contexto.descripcion" placeholder="descripción" style="width:80%; height:50px;"></textarea></p>
+
+        </div>
+    </div>
+    <button ng-click="guardar()" class="btn btn-success glyphicon glyphicon-ok"> <span>Guardar</span></button> 
+    <a href="#/documentos" class="btn btn-primary glyphicon glyphicon-home"> <span>volver al inicio</span></a>
+
+</div>
+
+

@@ -1,0 +1,146 @@
+<div class="creacion-plantillaDemo row">
+<script type="text/ng-template" id="list.html">
+    <ul dnd-list="list">
+        <li ng-repeat="item in list"
+            dnd-draggable="item"
+            dnd-effect-allowed="move"
+            dnd-moved="list.splice($index, 1)"
+            dnd-selected="models.selected = item"
+            ng-class="{selected: models.selected === item}"
+            ng-include="'componentes/'+item.type + '.html'">
+        </li>
+    </ul>
+</script>
+
+<!-- This template is responsible for rendering a container element. It uses
+     the above list template to render each container column -->
+<!--<script type="text/ng-template" id="container.html">
+    <div class="container-element box box-blue">
+        <h3>Contenedor {{item.id}}</h3>
+        <div class="column" ng-repeat="list in item.columns" ng-include="'list.html'"></div>
+        <div class="clearfix"></div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="input.html">
+   
+<form class="form-horizontal">
+  <div class="form-group form-group-lg">
+    <label class="col-sm-2 control-label" for="formGroupInputLarge">Mi label</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="text" id="formGroupInputLarge" placeholder="Mi dato">
+    </div>
+  </div> 
+</form>
+  
+</script>
+
+
+<script type="text/ng-template" id="text_area.html">
+
+   <form class="form-horizontal">
+  <div class="form-group form-group-lg">
+    <label class="col-sm-2 control-label" for="formGroupInputLarge">Mi label</label>
+    <div class="col-sm-10">
+         <textarea class="form-control" rows="3"></textarea>
+    </div>
+  </div> 
+</form>
+   
+</script>
+
+
+<script type="text/ng-template" id="op_multiple.html">
+ <div class="form-group">
+  <label for="sel1">Select list:</label>
+  <select class="form-control" id="sel1">
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+  </select>
+</div>
+</script>-->
+
+
+
+
+
+
+
+
+
+<!-- This template is responsible for rendering a container element. It uses
+     the above list template to render each container column -->
+<!--<script type="text/ng-template" id="input.html">
+    <div class="input-element box box-blue">
+        <h3>Contenedor {{item.id}}</h3>
+        <div class="column" ng-repeat="list in item.columns" ng-include="'list.html'"></div>
+        <div class="clearfix"></div>
+    </div>
+</script>-->
+
+
+
+
+<!-- Sidebar -->
+<div class="col-md-2">
+
+    <div class="toolbox box box-grey box-padding">
+        <h3>Elementos</h3>
+        <ul>
+            <!-- The toolbox only allows to copy objects, not move it. After a new
+                 element was created, dnd-copied is invoked and we generate the next id -->
+            <li ng-repeat="item in models.templates"
+                dnd-draggable="item"
+                dnd-effect-allowed="copy"
+                dnd-copied="item.id = item.id + 1"
+                >
+                <button type="button" class="btn btn-default btn-lg" disabled="disabled">{{item.type}}</button>
+            </li>
+        </ul>
+    </div>
+
+   
+
+    <div class="trashcan box box-grey box-padding">
+        <!-- If you use [] as referenced list, the dropped elements will be lost -->
+        <h3>Eliminar elementos</h3>
+        <ul dnd-list="[]">
+            <li><img src="creacion-plantilla/papel.jpg"></li>
+        </ul>
+    </div>
+
+</div>
+
+
+<!-- Template for a normal list item -->
+<!--<script type="text/ng-template" id="item.html">
+    <div class="item">Item {{item.id}} holaaaaa</div>
+</script>-->
+
+<!-- Main area with dropzones and source code -->
+<div class="col-md-10">
+    <div class="row">
+        <div ng-repeat="(zone, list) in models.dropzones" class="col-md-12">
+            <div class="dropzone box box-yellow">
+                <h3>Area para documento:{{zone}}</h3>
+                <div ng-include="'list.html'"></div>
+            </div>
+        </div>
+    </div>
+
+   
+
+   
+</div>
+
+
+<!-- Mostrar el codigo JSON GENERADO -->
+<div class="col-md-10">
+    <h3>Modelo Generado</h3>
+    <pre>{{modelAsJson}}</pre>
+</div>
+
+
+</div>
