@@ -18,49 +18,61 @@
     <div>
         <div id="contenidoPlantilla" class="container">
             <h3 class="bg-success" style="padding: 5px 10px">Contenido:</h3>
-            <table>
-                <tr>
-                    <td>
-                        <h4 style="padding: 0 20px; margin: 0px "><small>Opciones</small></h4>  
-                    </td>
-                    <td>
-                        <h4 style="padding: 0 20px; margin: 0px "><small>Editor markDown</small></h4> 
-                    </td>
-                </tr>
-                <tr>
-                    <td style="vertical-align: top;">
-                        <!--                  OPCIONES                      -->
-                        <div class="bg-info" style="border: 1px gray solid;  padding: 10px;  ">
-                            <div    align="center">
-                                <div style="border: 1px gray solid; background-color: white; margin:  15px 0px; cursor: pointer" >
-                                    <span class="glyphicon glyphicon-font  btn-lg" ng-click='insertarCodigo("1")' style="padding:0px 10px; font-size:35px; "> <a></a></span>
-                                </div>
-                                <div style="border: 1px gray solid; background-color: white; margin:  15px 0px; cursor: pointer">
-                                    <span class="glyphicon glyphicon-edit   btn-lg" ng-click='insertarCodigo("2")' style="padding:0 10px; font-size:45px"></span>
-                                </div>
-                                <div style="border: 1px gray solid; background-color: white; margin:  15px 0px; cursor: pointer" >
-                                    <span class="glyphicon glyphicon-link btn-lg" style="padding:0 10px; font-size:35px"></span>
-                                </div>
-                            </div> 
-                        </div>
-                    </td>
-                    <td>
-                        <!-- -----------------------------------EDITOR --------------------------------------------->
-                        <textarea id="txtMdContenido"  ng-model="contexto.contenido" markitup="markupSettings" class="markitup " style="  height:8cm;"></textarea>
-                        <button ng-click="contexto.contenido = ''" class="glyphicon glyphicon-unchecked  btn-info btn"> <span>Limpiar</span></button> 
-                        <h4><small>Previsualización</small></h4>
-                        <div id="txtHtmlPlantilla" class="txtPrevisualizacion" marked="contexto.contenido" style="width:21.6cm;  height:8cm; overflow:auto; border:1px solid gray; ">
-                        </div>
-                    </td>
-                </tr>
-            </table>
-            <div class="row">
-                <h4><small>Descripción:</small></h4>
-                <p><textarea ng-model="contexto.descripcion" placeholder="descripción" style="width:60%; height:50px;"></textarea></p>
-            </div>
-        </div>
-        <button ng-click="guardar()" class="btn btn-success glyphicon glyphicon-ok"> <span>Guardar</span></button> 
-        <a href="#/plantillas" class="btn btn-primary glyphicon glyphicon-home"> <span>Volver al inicio</span></a>
-    </div>
 
-</div>
+            <!-- ******************* DRAG N DROP ----------------------------------->
+            <div class="creacion-plantillaDemo row">
+                <script type="text/ng-template" id="list.html">
+                    <ul dnd-list="list">
+                    <li ng-repeat="item in list"
+                    dnd-draggable="item"
+                    dnd-effect-allowed="move"
+                    dnd-moved="list.splice($index, 1)"
+                    dnd-selected="models.selected = item"
+                    ng-class="{selected: models.selected === item}"
+                    ng-include="'componentes/'+item.type + '.html'">
+                    </li>
+                    </ul>
+                </script> 
+
+                <div class="col-md-2">
+
+                    <div class="toolbox box box-grey box-padding">
+                        <h3>Elementos</h3>
+                        <ul>
+                            <li ng-repeat="item in models.templates"
+                                dnd-draggable="item"
+                                dnd-effect-allowed="copy"
+                                dnd-copied="item.id = item.id + 1"
+                                >
+                                <button type="button" class="btn btn-default btn-lg" disabled="disabled">{{item.type}}</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="trashcan box box-grey box-padding">
+                        <!-- If you use [] as referenced list, the dropped elements will be lost -->
+                        <h3>Eliminar elementos</h3>
+                        <ul dnd-list="[]">
+                            <li><img src="images/papelera.jpg"></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div ng-repeat="(zone, list) in models.dropzones" class="col-md-12">
+                            <div class="dropzone box box-yellow">
+                                <h3>Area para documento:{{zone}}</h3>
+                                <div ng-include="'list.html'"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <h4><small>Descripción:</small></h4>
+                    <p><textarea ng-model="contexto.descripcion" placeholder="descripción" style="width:60%; height:50px;"></textarea></p>
+                </div>
+            </div>
+            <button ng-click="guardar()" class="btn btn-success glyphicon glyphicon-ok"> <span>Guardar</span></button> 
+            <a href="#/plantillas" class="btn btn-primary glyphicon glyphicon-home"> <span>Volver al inicio</span></a>
+        </div>
+
+    </div>

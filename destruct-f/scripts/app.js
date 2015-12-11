@@ -1,5 +1,5 @@
 
-    var app = angular.module('app', ['ngRoute', 'ngResource', 'hc.marked', 'naif.base64'])
+    var app = angular.module('app', ['ngRoute', 'ngResource', 'hc.marked', 'naif.base64', 'dndLists'])
         .config(['markedProvider', function(markedProvider)
             {
                 markedProvider.setOptions({gfm: true});
@@ -13,12 +13,12 @@
             };
 
             //API-REST del Backend de Maestras
-            comun.restMaestras = $resource("../s-doce-b/public/index.php/maestras/:id", {id: "@_id"}, {
-                update: {method: "PUT", params: {id: "@id"}}
-            });
+//            comun.restMaestras = $resource("../s-doce-b/public/index.php/maestras/:id", {id: "@_id"}, {
+//                update: {method: "PUT", params: {id: "@id"}}
+//            });
 
             //API-REST del Backend de Plantillas
-            comun.restPlantillas = $resource("../s-doce-b/public/index.php/plantillas/:id", {id: "@_id"}, {
+            comun.restPlantillas = $resource("http://localhost:3000/v2/plantillas/:id", {id: "@_id"}, {
                 update: {method: "PUT", params: {id: "@id"}}
             });
 

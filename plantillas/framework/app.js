@@ -13,13 +13,6 @@ angular.module("appDND", ["ngRoute", "dndLists"])
 
             $scope.models = {
                 selected: null,
-//                templates: [
-//                    {type: "input5", id: 1},
-//                    {type: "text_area", id: 1, parametros: ["uno", "dos", "tres"]},
-//                    {type: "op_multiple", id: 1},
-////                    {type: "item", id: 7},
-//                    {type: "container", id: 1, columns: [[], []]},
-//                ],
                 dropzones: {
                     "PlantillaContenido": [],
                 }
