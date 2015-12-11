@@ -1,15 +1,14 @@
     var mongoose = require('mongoose');
-    mongoose.connect('mongodb://localhost/dest', function(err) {
+    mongoose.connect('mongodb://localhost/bd-estruct', function(err) {
         if (err) {
-            console.log('connection error', err);
+            console.log('error con la conexion mongo', err);
         } else {
-            console.log('connection successful');
+            console.log('conexion mongo exitosa');
         }
     });
 
-    require('./models/cursos');
-    require('./models/plantillas');
-    require('./models/documentos');
+    require('./models/plantillasModel');
+    require('./models/documentosModel');
 
 var express = require('express');
 var path = require('path');
@@ -20,6 +19,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+
 
 var app = express();
 
