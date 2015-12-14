@@ -1,42 +1,42 @@
 0 info it worked if it ends with ok
-1 verbose cli [ 'node', '/usr/local/bin/npm', 'start' ]
-2 info using npm@3.5.0
-3 info using node@v0.10.29
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'start' ]
+2 info using npm@1.4.29
+3 info using node@v0.10.41
 4 verbose node symlink /usr/bin/node
-5 verbose run-script [ 'prestart', 'start', 'poststart' ]
-6 info lifecycle d-estruct@0.0.0~prestart: d-estruct@0.0.0
-7 silly lifecycle d-estruct@0.0.0~prestart: no script for prestart, continuing
-8 info lifecycle d-estruct@0.0.0~start: d-estruct@0.0.0
-9 verbose lifecycle d-estruct@0.0.0~start: unsafe-perm in lifecycle true
-10 verbose lifecycle d-estruct@0.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/var/www/v2/destruct-b/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
-11 verbose lifecycle d-estruct@0.0.0~start: CWD: /var/www/v2/destruct-b
-12 silly lifecycle d-estruct@0.0.0~start: Args: [ '-c', 'node ./bin/www' ]
-13 silly lifecycle d-estruct@0.0.0~start: Returned: code: 8  signal: null
-14 info lifecycle d-estruct@0.0.0~start: Failed to exec start script
-15 verbose stack Error: d-estruct@0.0.0 start: `node ./bin/www`
-15 verbose stack Exit status 8
-15 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:232:16)
-15 verbose stack     at EventEmitter.emit (events.js:98:17)
-15 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/spawn.js:24:14)
-15 verbose stack     at ChildProcess.emit (events.js:98:17)
-15 verbose stack     at maybeClose (child_process.js:755:16)
-15 verbose stack     at Process.ChildProcess._handle.onexit (child_process.js:822:5)
-16 verbose pkgid d-estruct@0.0.0
-17 verbose cwd /var/www/v2/destruct-b
-18 error Linux 3.16.0-4-amd64
-19 error argv "node" "/usr/local/bin/npm" "start"
-20 error node v0.10.29
-21 error npm  v3.5.0
-22 error code ELIFECYCLE
-23 error d-estruct@0.0.0 start: `node ./bin/www`
-23 error Exit status 8
-24 error Failed at the d-estruct@0.0.0 start script 'node ./bin/www'.
-24 error Make sure you have the latest version of node.js and npm installed.
-24 error If you do, this is most likely a problem with the d-estruct package,
-24 error not with npm itself.
-24 error Tell the author that this fails on your system:
-24 error     node ./bin/www
-24 error You can get their info via:
-24 error     npm owner ls d-estruct
-24 error There is likely additional logging output above.
-25 verbose exit [ 1, true ]
+5 warn deprecated This version of npm lacks support for important features,
+6 warn deprecated such as scoped packages, offered by the primary npm
+7 warn deprecated registry. Consider upgrading to at least npm@2, if not the
+8 warn deprecated latest stable version. To upgrade to npm@2, run:
+9 warn deprecated npm -g install npm@latest-2
+10 warn deprecated To upgrade to the latest stable version, run:
+11 warn deprecated npm -g install npm@latest
+12 warn deprecated (Depending on how Node.js was installed on your system, you
+13 warn deprecated may need to prefix the preceding commands with `sudo`, or if
+14 warn deprecated on Windows, run them from an Administrator prompt.)
+15 warn deprecated If you're running the version of npm bundled with
+16 warn deprecated Node.js 0.10 LTS, be aware that the next version of 0.10 LTS
+17 warn deprecated will be bundled with a version of npm@2, which has some small
+18 warn deprecated backwards-incompatible changes made to `npm run-script` and
+19 warn deprecated semver behavior.
+20 verbose run-script [ 'prestart', 'start', 'poststart' ]
+21 info prestart d-estruct@0.0.0
+22 info start d-estruct@0.0.0
+23 verbose unsafe-perm in lifecycle true
+24 info d-estruct@0.0.0 Failed to exec start script
+25 error d-estruct@0.0.0 start: `node ./bin/www`
+25 error Exit status 8
+26 error Failed at the d-estruct@0.0.0 start script.
+26 error This is most likely a problem with the d-estruct package,
+26 error not with npm itself.
+26 error Tell the author that this fails on your system:
+26 error     node ./bin/www
+26 error You can get their info via:
+26 error     npm owner ls d-estruct
+26 error There is likely additional logging output above.
+27 error System Linux 3.16.0-4-amd64
+28 error command "/usr/bin/node" "/usr/bin/npm" "start"
+29 error cwd /var/www/v2/destruct-b
+30 error node -v v0.10.41
+31 error npm -v 1.4.29
+32 error code ELIFECYCLE
+33 verbose exit [ 1, true ]

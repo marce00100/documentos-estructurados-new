@@ -23,13 +23,13 @@
                         <td> 
                             <a href="#/plantillas/editar/{{item._id}}" >
                                 <div class="material-switch pull-right">
-                                    <input id="someSwitchOptionSuccess" name="someSwitchOption001" type="checkbox" ng-model="item.vigente" ng-true-value="1" ng-false-value="0" disabled=""/>
+                                    <input id="someSwitchOptionSuccess" name="someSwitchOption001" type="checkbox" ng-model="item.vigente" ng-true-value=true ng-false-value=false disabled=""/>
                                     <label for="someSwitchOptionSuccess" class="label-success"></label>
                                 </div>
                             </a>
                         </td>                        
-                        <td>{{item.usuario_creacion}}<br>{{item.fecha_creacion}}</td>
-                        <td>{{item.fecha_modificacion}}</td>                        
+                        <td>{{item.usuario_crea}}<br>{{item.fecha_crea}}</td>
+                        <td>{{item.fecha_modifica}}</td>                        
                     </tr>
                 </tbody>
             </table>

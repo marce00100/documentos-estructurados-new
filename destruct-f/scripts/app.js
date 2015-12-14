@@ -1,29 +1,22 @@
 
-    var app = angular.module('app', ['ngRoute', 'ngResource', 'hc.marked', 'naif.base64', 'dndLists'])
-        .config(['markedProvider', function(markedProvider)
-            {
-                markedProvider.setOptions({gfm: true});
-            }])
+    var app = angular.module('app', ['ngRoute', 'ngResource',  'naif.base64', 'dndLists'])
+
         .factory('appFactory', function($resource, $location, $rootScope)
         {
             var comun = {};
+            var dominio = "/v2";
 
             comun.colocarSubtitulo = function(sub) {
                 $rootScope.subtitulo = sub;
             };
 
-            //API-REST del Backend de Maestras
-//            comun.restMaestras = $resource("../s-doce-b/public/index.php/maestras/:id", {id: "@_id"}, {
-//                update: {method: "PUT", params: {id: "@id"}}
-//            });
-
             //API-REST del Backend de Plantillas
-            comun.restPlantillas = $resource("http://localhost:3000/v2/plantillas/:id", {id: "@_id"}, {
+            comun.restPlantillas = $resource("http://localhost:3000" + dominio + "/plantillas/:id", {id: "@_id"}, {
                 update: {method: "PUT", params: {id: "@id"}}
             });
 
             //API-REST del Backend de Documentos
-            comun.restDocumentos = $resource("../s-doce-b/public/index.php/documentos/:id", {id: "@_id"}, {
+            comun.restDocumentos = $resource("http://localhost:3000" + dominio + "documentos/:id", {id: "@_id"}, {
                 update: {method: "PUT", params: {id: "@id"}}
             });
 
@@ -38,18 +31,6 @@
             };
 
             return comun;
-        })
-
-        .directive("markitup", function() {
-            return {
-                restrict: "A",
-                scope: {
-                    settings: "=markitup"
-                },
-                link: function(scope, element, attrs) {
-                    angular.element(element).markItUp(scope.settings);
-                }
-            };
         })
         .directive('bindHtmlCompile', ['$compile', function($compile) {
                 return {
