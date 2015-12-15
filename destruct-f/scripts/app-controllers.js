@@ -11,14 +11,18 @@
                 templateUrl: "templates/plantillas-lista.html",
                 controller: "plantillasInicioCtrl"
             });
-            $routeProvider.when('/plantillas/nueva', {
+            $routeProvider.when('/plantillas/nuevo', {
                 templateUrl: "templates/plantillas-nueva.html",
                 controller: "plantillasEditarNuevaCtrl"
             });
-            $routeProvider.when('/plantillas/editar/:id', {
+            $routeProvider.when('/plantillas/:id/editar/', {
                 templateUrl: "templates/plantillas-editar.html",
                 controller: "plantillasEditarNuevaCtrl"
             });
+//            $routeProvider.when('/plantillas/:id/json/', {
+////                templateUrl: "templates/plantillas-editar.html",
+//                controller: "plantillasJsonCtrl"
+//            });
         }])
         .controller('plantillasInicioCtrl', ['$scope', 'appFactory', function($scope, appFactory)
             {
@@ -33,7 +37,7 @@
                 $scope.modulo = 2;
                 $scope.contexto = {};
                 $scope.componentes = {
-                    biblioteca:biblioteca,
+                    biblioteca: biblioteca,
                     componentesPlantilla: {
                         "lista": []
                     }
@@ -61,7 +65,7 @@
                         appFactory.restPlantillas.save($scope.contexto).$promise.then(function(respuesta)
                         {
                             if (respuesta.mensaje) {
-                                appFactory.irA("/plantillas/editar/" + respuesta.plantilla._id);
+                                appFactory.irA("/plantillas/" + respuesta.plantilla._id + "/editar/");
                             }
                         });
                     }
@@ -75,35 +79,16 @@
                     }
                 };
             }]);
-
-//        .controller('plantillasEditarCtrl', ['$scope', 'appFactory', '$routeParams', function($scope, appFactory, $routeParams)
-//            {
-//                $scope.modulo = 2;
-//                appFactory.colocarSubtitulo("Modificar Plantilla");
-//                $scope.contexto = {};
-//                $scope.models = {
-//                    componentesPlantilla: {
-//                        "componentes": []
-//                    }
-//                };
-//                $scope.contexto.biblioteca = biblioteca;
-//                var id = $routeParams.id;
-//                appFactory.restPlantillas.get({id: id}, function(data) {
-//                    $scope.contexto = data.plantilla;
-//                    $scope.models.componentesPlantilla.componentes = data.plantilla.componentes;
-//                });
-//
-//
-//
-//                $scope.guardar = function()
-//                {
-//                    appFactory.restPlantillas.update({id: $scope.contexto._id}, $scope.contexto)
-//                        .$promise.then(function(respuesta) {
-//                            if (respuesta.mensaje) {
-//                            }
-//                        });
-//                };
-//            }]);
+//        .controller('plantillasJsonCtrl', function(appFactory)
+//        {
+//            var id = $routeParams.id;
+//            var contexto = {};
+//            appFactory.restPlantillas.get({id: id}, function(data) {
+//                contexto = data.plantilla;
+//            });
+//            printf(contexto);
+//            
+//        });
 
     /*
      * Rutas  y Controladores de DOCUMENTOS ============================================================
@@ -116,11 +101,11 @@
                 templateUrl: "templates/documentos-lista.html",
                 controller: "documentosInicioCtrl"
             });
-            $routeProvider.when('/documentos/nuevo', {
+            $routeProvider.when('/documentos/nuevo/plantilla/:id', {
                 templateUrl: "templates/documentos-nuevo.html",
                 controller: "documentosNuevoCtrl"
             });
-            $routeProvider.when('/documentos/editar/:id', {
+            $routeProvider.when('/documentos/:id/editar/', {
                 templateUrl: "templates/documentos-editar.html",
                 controller: "documentosEditarCtrl"
             });
@@ -128,48 +113,37 @@
                 redirectTo: '/documentos'
             });
         }])
-        .controller('documentosInicioCtrl', ['$scope', 'appFactory', function($scope, appFactory)
+        .controller('documentosInicioCtrl', ['$scope', '$resource', 'appFactory', function($scope, $resource, appFactory)
             {
                 $scope.modulo = 3;
                 appFactory.colocarSubtitulo("Documentos");
+
+                $resource(appFactory.dominio + "/plantillas/vigentes").get(function(plantillasRes) {
+                    $scope.plantillasVigentes = plantillasRes.plantillas;
+                });
+
                 appFactory.restDocumentos.get(function(respuesta) {
                     $scope.lista = respuesta.documentos;
                 });
             }])
-        .controller('documentosNuevoCtrl', ['$scope', 'appFactory', '$resource', '$rootScope', function($scope, appFactory, $resource, $rootScope)
+        .controller('documentosNuevoCtrl', ['$scope', 'appFactory', '$resource', '$routeParams', '$rootScope', function($scope, appFactory, $resource, $routeParams, $rootScope)
             {
                 $scope.modulo = 3;
                 appFactory.colocarSubtitulo("Documento Nuevo");
                 $scope.contexto = {};
+                var idP = $routeParams.id;
+                $resource(appFactory.dominio + "/plantillas/" + idP).get(function(plantillasRes) {
+                    $scope.contexto.plantilla = plantillasRes.plantilla;
+                });
+//                appFactory.restPlantillas.get({id: id}, function(data) {
+//                    $scope.contexto = data.plantilla;
+//                    $scope.componentes.componentesPlantilla.lista = data.plantilla.componentes;
+//                });
 
-                function cargarPlantillasActivas()
-                {
-                    // carga plantillas vigentes
-                    $resource("../s-doce-b/public/index.php/plantillas/vigente/1").get(function(respuesta) {
-                        $scope.plantillasVigentes = respuesta.plantillas;
-                    });
-
-                    //carga plantilla maestra activa
-                    $resource("../s-doce-b/public/index.php/maestra/activa").get(function(respuesta) {
-                        $scope.contexto.maestra_id = respuesta.plantilla_maestra._id;
-                        $scope.contexto.maestra_nombre = respuesta.plantilla_maestra.nombre;
-                        $scope.contexto.maestra_cabecera = respuesta.plantilla_maestra.cabecera;
-                        $scope.contexto.maestra_pie = respuesta.plantilla_maestra.pie;
-
-                    });
-                }
-                cargarPlantillasActivas();
-
-                $scope.cargarPlantilla = function()
-                {
-                    var idSeleccionado = $scope.contexto.plantillaObjeto._id;
-                    appFactory.restPlantillas.get({id: idSeleccionado}, function(data)
-                    {
-                        var plantillaContenido = $rootScope.adecuarContenidoPlantilla(data.plantilla.contenido);
-                        $scope.contexto.plantilla_contenido = plantillaContenido.contenidoIds;
-                        $scope.contexto.plantilla_contenidoHtml = marked(plantillaContenido.contenidoIdsHtml);
-                    });
-                };
+//                appFactory.restPlantillas.get({id: idPlantilla}, function(data)
+//                {
+//                    $scope.contexto.plantilla_componentes = data.plantilla.componentes;
+//                });
 
                 $scope.guardar = function()
                 {
@@ -184,6 +158,7 @@
                     });
                 };
             }])
+
         .controller('documentosEditarCtrl', ['$scope', 'appFactory', '$resource', '$routeParams', function($scope, appFactory, $resource, $routeParams)
             {
                 $scope.modulo = 3;

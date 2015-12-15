@@ -4,27 +4,21 @@
         .factory('appFactory', function($resource, $location, $rootScope)
         {
             var comun = {};
-            var dominio = "/v2";
+            comun.dominio = "http://localhost:3000/v2"; 
 
             comun.colocarSubtitulo = function(sub) {
                 $rootScope.subtitulo = sub;
             };
 
             //API-REST del Backend de Plantillas
-            comun.restPlantillas = $resource("http://localhost:3000" + dominio + "/plantillas/:id", {id: "@_id"}, {
+            comun.restPlantillas = $resource(comun.dominio + "/plantillas/:id", {id: "@_id"}, {
                 update: {method: "PUT", params: {id: "@id"}}
             });
 
             //API-REST del Backend de Documentos
-            comun.restDocumentos = $resource("http://localhost:3000" + dominio + "documentos/:id", {id: "@_id"}, {
+            comun.restDocumentos = $resource(comun.dominio + "/documentos/:id", {id: "@_id"}, {
                 update: {method: "PUT", params: {id: "@id"}}
             });
-
-            comun.menu = function(indice)
-            {
-                alert(indice);
-                return indice;
-            };
 
             comun.irA = function(ruta) {
                 $location.url(ruta);

@@ -2,7 +2,7 @@
 <div class="container">
     <div >
         <br>
-        <a href="#/plantillas/nueva" class="btn btn-success glyphicon glyphicon-plus"> <span>Crear plantilla</span></a>
+        <a href="#/plantillas/nuevo" class="btn btn-success glyphicon glyphicon-plus"> <span>Crear plantilla</span></a>
         <div class="table-responsive">
             <table id="breakingBadChar" class="table table-hover" > 
                 <thead>
@@ -17,13 +17,13 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="item in lista"> 
-                        <td><a href="#/plantillas/editar/{{item._id}}" class="glyphicon glyphicon-pencil" ></a></td>
-                        <td><a href="#/plantillas/editar/{{item._id}}"><b>{{item.nombre}}</b></a></td>
+                        <td><a href="#/plantillas/{{item._id}}/editar/" class="glyphicon glyphicon-pencil" ></a></td>
+                        <td><a href="#/plantillas/{{item._id}}/editar/"><b>{{item.nombre}}</b></a></td>
                         <td>{{item.descripcion}}</td>
                         <td> 
-                            <a href="#/plantillas/editar/{{item._id}}" >
+                            <a href="#/plantillas/{{item._id}}/editar/" >
                                 <div class="material-switch pull-right">
-                                    <input id="someSwitchOptionSuccess" name="someSwitchOption001" type="checkbox" ng-model="item.vigente" ng-true-value=true ng-false-value=false disabled=""/>
+                                    <input id="someSwitchOptionSuccess" name="someSwitchOption001" type="checkbox" ng-model="item.vigente" disabled=""/>
                                     <label for="someSwitchOptionSuccess" class="label-success"></label>
                                 </div>
                             </a>

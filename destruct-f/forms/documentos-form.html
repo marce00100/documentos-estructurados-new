@@ -5,13 +5,6 @@
         <div class="col-md-6 col-xs-7">
             <input ng-model="contexto.nombre" placeholder="Documento sin nombre" style="width: 100%; font-size: 18pt; font-style: italic; ">
         </div>
-        <div class="list-group-item col-md-5 col-xs-4">
-            Plantilla base:  
-            <select ng-show="contexto._id == null" ng-model="contexto.plantillaObjeto" ng-change="cargarPlantilla()" ng-options="{_id : item._id, nombre : item.nombre} as item.nombre for item in plantillasVigentes">
-                <option value="">- Seleccione una plantilla -</option>
-            </select>
-            <span ng-hide="contexto._id == null" style="font-size: 14pt"> {{contexto.plantilla_nombre}}</span>
-        </div>
     </div>
 
     <div>
