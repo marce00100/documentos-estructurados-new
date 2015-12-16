@@ -1,10 +1,10 @@
 
-    var app = angular.module('app', ['ngRoute', 'ngResource',  'naif.base64', 'dndLists'])
+    var app = angular.module('app', ['ngRoute', 'ngResource', 'naif.base64', 'dndLists'])
 
         .factory('appFactory', function($resource, $location, $rootScope)
         {
             var comun = {};
-            comun.dominio = "http://localhost:3000/v2"; 
+            comun.dominio = "http://localhost:3000/v2";
 
             comun.colocarSubtitulo = function(sub) {
                 $rootScope.subtitulo = sub;
@@ -22,6 +22,23 @@
 
             comun.irA = function(ruta) {
                 $location.url(ruta);
+            };
+
+            comun.colocaIdsComponentes = function(componentes)
+            {
+                var lista = componentes.componentesPlantilla.lista;
+                var indice = [];
+                for (i = 0; i < componentes.biblioteca.length; i++)
+                {
+                    indice[componentes.biblioteca[i].componente] = 1;
+                }
+                for (i = 0; i < lista.length; i++)
+                {
+                    var item = lista[i];
+                    item.id = item.componente + "-" + indice[item.componente].toString();
+                    indice[item.componente] += 1;
+                }
+                return lista;
             };
 
             return comun;

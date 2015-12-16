@@ -20,5 +20,9 @@
                 angular.element(texts[i]).val("");
             for (var i = 0; i < inputs.length; i++)
                 angular.element(inputs[i]).val("");
-        };        
+        };   
+        
+ 
+        
+        
     });

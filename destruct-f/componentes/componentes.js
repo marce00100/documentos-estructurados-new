@@ -1,5 +1,17 @@
-biblioteca = [
-    {type: "input", id: 1},
-    {type: "textarea", id: 1, parametros: ["uno", "dos", "tres"]},
-    {type: "op_multiple", id: 1}
-]
+    biblioteca = [
+        {
+            componente: "input", 
+            tipo:"metadato",
+            parametros: {label: ""}
+        },
+        {
+            componente: "op_multiple", 
+            tipo: "metadato",
+            parametros: {}
+        },
+        {
+            componente: "textarea",
+            tipo: "seccion",
+            parametros: ["uno", "dos", "tres"]
+        }
+    ]

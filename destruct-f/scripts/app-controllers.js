@@ -59,7 +59,7 @@
 
                 $scope.guardar = function()
                 {
-                    $scope.contexto.componentes = $scope.componentes.componentesPlantilla.lista; // $scope.componentesJson;
+                    $scope.contexto.componentes = appFactory.colocaIdsComponentes($scope.componentes); // $scope.componentesJson;
                     if (typeof id === "undefined")
                     {
                         appFactory.restPlantillas.save($scope.contexto).$promise.then(function(respuesta)
