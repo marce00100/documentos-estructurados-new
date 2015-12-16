@@ -132,18 +132,12 @@
                 appFactory.colocarSubtitulo("Documento Nuevo");
                 $scope.contexto = {};
                 var idP = $routeParams.id;
-                $resource(appFactory.dominio + "/plantillas/" + idP).get(function(plantillasRes) {
-                    $scope.contexto.plantilla = plantillasRes.plantilla;
+                $resource(appFactory.dominio + "/plantillas/" + idP).get(function(plantillaRes) {
+                    $scope.contexto.plantilla = plantillaRes.plantilla.nombre;
+                    $scope.contexto.plantilla_id = plantillaRes.plantilla._id;
+                    $scope.contexto.plantillaComponentes = plantillaRes.plantilla.componentes;
                 });
-//                appFactory.restPlantillas.get({id: id}, function(data) {
-//                    $scope.contexto = data.plantilla;
-//                    $scope.componentes.componentesPlantilla.lista = data.plantilla.componentes;
-//                });
 
-//                appFactory.restPlantillas.get({id: idPlantilla}, function(data)
-//                {
-//                    $scope.contexto.plantilla_componentes = data.plantilla.componentes;
-//                });
 
                 $scope.guardar = function()
                 {
