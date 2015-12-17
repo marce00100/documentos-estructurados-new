@@ -2,7 +2,7 @@
         {
             componente: "input", 
             tipo:"metadato",
-            parametros: {label: ""}
+            parametros: {etiqueta: ""}
         },
         {
             componente: "op_multiple", 
@@ -12,6 +12,6 @@
         {
             componente: "textarea",
             tipo: "seccion",
-            parametros: ["uno", "dos", "tres"]
+            parametros: {titulo: ""}
         }
     ]

@@ -1,5 +1,3 @@
-
-
     var mongoose = require('mongoose');
     mongoose.connect('mongodb://localhost/bd-estruct', function(err) {
         if (err) {

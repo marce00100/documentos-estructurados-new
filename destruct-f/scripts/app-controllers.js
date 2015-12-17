@@ -12,12 +12,12 @@
                 controller: "plantillasInicioCtrl"
             });
             $routeProvider.when('/plantillas/nuevo', {
-                templateUrl: "templates/plantillas-nueva.html",
-                controller: "plantillasEditarNuevaCtrl"
+                templateUrl: "templates/plantillas-nuevo-editar.html",
+                controller: "plantillasNuevoEditarCtrl"
             });
             $routeProvider.when('/plantillas/:id/editar/', {
-                templateUrl: "templates/plantillas-editar.html",
-                controller: "plantillasEditarNuevaCtrl"
+                templateUrl: "templates/plantillas-nuevo-editar.html",
+                controller: "plantillasNuevoEditarCtrl"
             });
 //            $routeProvider.when('/plantillas/:id/json/', {
 ////                templateUrl: "templates/plantillas-editar.html",
@@ -32,7 +32,7 @@
                     $scope.lista = respuesta.plantillas;
                 });
             }])
-        .controller('plantillasEditarNuevaCtrl', ['$scope', 'appFactory', '$routeParams', function($scope, appFactory, $routeParams)
+        .controller('plantillasNuevoEditarCtrl', ['$scope', 'appFactory', '$routeParams', function($scope, appFactory, $routeParams)
             {
                 $scope.modulo = 2;
                 $scope.contexto = {};
