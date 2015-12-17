@@ -24,13 +24,13 @@
                 $location.url(ruta);
             };
 
-            comun.colocaIdsComponentes = function(componentes)
+            comun.colocaIdsComponentesPlantilla = function(plantillaComponentes, biblioteca)
             {
-                var lista = componentes.componentesPlantilla.lista;
+                var lista = plantillaComponentes;
                 var indice = [];
-                for (i = 0; i < componentes.biblioteca.length; i++)
+                for (i = 0; i < biblioteca.length; i++)
                 {
-                    indice[componentes.biblioteca[i].componente] = 1;
+                    indice[biblioteca[i].componente] = 1;
                 }
                 for (i = 0; i < lista.length; i++)
                 {
@@ -40,6 +40,7 @@
                 }
                 return lista;
             };
+
 
             return comun;
         })

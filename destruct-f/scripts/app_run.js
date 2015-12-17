@@ -1,6 +1,5 @@
     app.run(function($rootScope) {
 
-
         $rootScope.insertarImagen = function(img)
         {
             $rootScope.lastFocused;
@@ -20,9 +19,32 @@
                 angular.element(texts[i]).val("");
             for (var i = 0; i < inputs.length; i++)
                 angular.element(inputs[i]).val("");
-        };   
-        
- 
-        
-        
+        };
+
+        $rootScope.adecuarDocumentoParaGuardar = function(componentes)
+        {
+            var comp = componentes;
+            for (i = 0; i < comp.length; i++)
+            {
+                var item = comp[i];
+                item.campos = {};
+                if (item.tipo === "metadato")
+                {
+                    var inputs = angular.element("#" + item.id.toString()).find("input");
+                    var valor = angular.element(inputs[0]).val();
+                    comp[i].campos.valor = valor;
+                }
+                else if(item.tipo === "seccion")
+                {
+                    var texts = angular.element("#" + item.id.toString()).find("textarea");
+                    var contenido = angular.element(texts[0]).val();
+                    comp[i].campos.contenido = contenido;                    
+                }
+            }
+            
+            return comp;
+        };
+
+
+
     });

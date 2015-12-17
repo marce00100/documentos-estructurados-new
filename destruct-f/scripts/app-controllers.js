@@ -59,7 +59,7 @@
 
                 $scope.guardar = function()
                 {
-                    $scope.contexto.componentes = appFactory.colocaIdsComponentes($scope.componentes); // $scope.componentesJson;
+                    $scope.contexto.componentes = appFactory.colocaIdsComponentesPlantilla($scope.componentes.componentesPlantilla.lista, $scope.componentes.biblioteca); 
                     if (typeof id === "undefined")
                     {
                         appFactory.restPlantillas.save($scope.contexto).$promise.then(function(respuesta)
@@ -140,16 +140,17 @@
 
 
                 $scope.guardar = function()
-                {
-                    $scope.contexto.plantilla_id = $scope.contexto.plantillaObjeto._id;
-                    $scope.contexto.plantilla_nombre = $scope.contexto.plantillaObjeto.nombre;
-                    $scope.contexto.contenido = $scope.adecuarDocumentoParaGuardar();
-                    appFactory.restDocumentos.save($scope.contexto).$promise.then(function(respuesta)
-                    {
-                        if (respuesta.mensaje) {
-                            appFactory.irA("/documentos/editar/" + respuesta.documento._id);
-                        }
-                    });
+                {         
+                    var doc = $rootScope.adecuarDocumentoParaGuardar($scope.contexto.plantillaComponentes);
+                    
+                    console.log(doc);
+//                    $scope.contexto.contenido = $scope.adecuarDocumentoParaGuardar();
+//                    appFactory.restDocumentos.save($scope.contexto).$promise.then(function(respuesta)
+//                    {
+//                        if (respuesta.mensaje) {
+//                            appFactory.irA("/documentos/editar/" + respuesta.documento._id);
+//                        }
+//                    });
                 };
             }])
 
@@ -182,8 +183,6 @@
                         });
                 };
             }]);
-
-
 
 
 

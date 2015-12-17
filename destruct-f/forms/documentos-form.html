@@ -9,18 +9,16 @@
         </div>
         <div>
             <div id="contenidoDocumento" class="container">
-
                 <div class="row">
-
                     <div id="editorDocumento" class="txtEditor creacion-plantillaDemo row"  style="width:21.6cm;  height:8cm; overflow:auto; border:1px solid gray; ">
                         <div>
                             <div ng-repeat="item in contexto.plantillaComponentes"
-                                ng-class="{selected: models.selected === item}"
-                                ng-include="'componentes/' + item.type + '.html'">
+                                ng-class="item.tipo"
+                                ng-include="'componentes/' + item.componente + '.html'" 
+                                id="{{item.id}}">
                             </div>
                         </div>
                     </div>
-
                     <a class="glyphicon glyphicon-unchecked  btn-info btn" ng-click="limpiar()"> <span> Limpiar</span></a>
                 </div>
             </div>
