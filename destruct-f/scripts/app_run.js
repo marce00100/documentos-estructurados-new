@@ -21,7 +21,7 @@
                 angular.element(inputs[i]).val("");
         };
 
-        $rootScope.adecuarDocumentoParaGuardar = function(componentes)
+        $rootScope.adecuarDocumentoParaGuardar = function(componentesPlantilla)
         {
             var comp = componentes;
             for (i = 0; i < comp.length; i++)
@@ -40,9 +40,29 @@
                     var contenido = angular.element(texts[0]).val();
                     comp[i].campos.contenido = contenido;                    
                 }
-            }
-            
+            }            
             return comp;
+        };
+        $rootScope.mostrarCampos = function(componentesDocumento)
+        {
+            var comp = componentesDocumento;
+            console.log(comp);
+            for(i=0; i< comp.length; i++)
+            {
+                var item = comp[i];
+                if(item.tipo === "metadato")
+                {
+                    var inputs = angular.element("#" + item.id.toString()).find("input");
+                    var valor = item.campos.valor;
+                    angular.element(inputs[0]).val(valor);
+                }
+                else if(item.tipo === "seccion")
+                {
+                    var texts = angular.element("#" + item.id.toString()).find("textarea");
+                    var contenido = item.campos.contenido;
+                    angular.element(texts[0]).val(contenido);                  
+                }
+            }
         };
 
 
