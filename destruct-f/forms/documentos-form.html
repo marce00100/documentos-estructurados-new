@@ -7,25 +7,20 @@
                 <input ng-model="contexto.nombre" placeholder="Documento sin nombre" style="width: 100%; font-size: 18pt; font-style: italic; ">
             </div>
         </div>
-        <div>
-            <div id="contenidoDocumento" class="container">
-                <div class="row">
-                    <div id="editorDocumento" class="txtEditor creacion-plantillaDemo row"  style="width:21.6cm;  height:8cm; overflow:auto; border:1px solid gray; ">
-                        <div>
-                            <div ng-repeat="item in contexto.plantillaComponentes"
-                                ng-class="item.tipo"
-                                ng-include="'componentes/' + item.componente + '.html'" 
-                                id="{{item.id}}">
-                            </div>
-                        </div>
+        <div id="contenidoDocumento" class="container" >
+            <div class="row">
+                <div id="editorDocumento" class="txtEditor creacion-plantillaDemo row"  style="width:21.6cm;  height:8cm; overflow:auto; border:1px solid gray; ">
+
+                    <div ng-repeat="item in contexto.componentes"
+                         ng-class="item.tipo"
+                         ng-include="'componentes/' + item.componente + '.html'" 
+                         id="{{item.id}}" 
+                         ng-init="(item.tipo ==='metadato')? valor=item.campos.valor : contenido = item.campos.contenido"
+                         >
                     </div>
-                    <a class="glyphicon glyphicon-unchecked  btn-info btn" ng-click="limpiar()"> <span> Limpiar</span></a>
                 </div>
+                <a class="glyphicon glyphicon-unchecked  btn-info btn" ng-click="limpiar()"> <span> Limpiar</span></a>
             </div>
-
-            <h4><small>Descripción del documento:</small></h4>
-            <p><textarea ng-model="contexto.descripcion" placeholder="descripción" style="width:80%; height:50px;"></textarea></p>
-
         </div>
     </div>
     <button ng-click="guardar()" class="btn btn-success glyphicon glyphicon-ok"> <span>Guardar</span></button> 

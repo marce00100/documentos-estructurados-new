@@ -34,7 +34,8 @@
         }
         else
         {
-            Plantilla.findById(req.params.id, function(err, plantillaRes)
+            var visibles = '_id nombre descripcion vigente componentes usuario_crea fecha_crea usuario_modifica fecha_modifica';
+            Plantilla.findById(req.params.id, visibles, function(err, plantillaRes)
             {
                 res.json({
                     mensaje: "Encontrada",
@@ -64,7 +65,7 @@
         plantilla = new Plantilla();
         plantilla.nombre = (typeof req.body.nombre === "undefined") ? "" : req.body.nombre;
         plantilla.descripcion = (typeof req.body.descripcion === "undefined") ? "" : req.body.descripcion;
-        plantilla.vigente = (typeof req.body.vigente === "undefined") ? "" : req.body.vigente; 
+        plantilla.vigente = (typeof req.body.vigente === "undefined") ? "" : req.body.vigente;
         plantilla.componentes = componentesJson;
         plantilla.usuario_crea = usuario_crea;
         plantilla.usuario_modifica = usuario_crea;
@@ -83,11 +84,11 @@
     {
         var comp = req.body.componentes;
         var componentesJson = typeof (comp) === "string" ? JSON.parse(comp) : comp;
-        Plantilla.findById(req.params.id, function(err, plantilla)
+        Plantilla.findById(req.params.id, "", function(err, plantilla)
         {
             plantilla.nombre = (typeof req.body.nombre === "undefined") ? "" : req.body.nombre;
             plantilla.descripcion = (typeof req.body.descripcion === "undefined") ? "" : req.body.descripcion;
-            plantilla.vigente = (typeof req.body.vigente === "undefined") ? "" : req.body.vigente; 
+            plantilla.vigente = (typeof req.body.vigente === "undefined") ? "" : req.body.vigente;
             plantilla.componentes = componentesJson;
             plantilla.usuario_modifica = usuario_modifica;
             plantilla.fecha_modifica = Date.now();
@@ -106,7 +107,9 @@
 
     router.get(dominio + '/documentos', function(req, res, next)
     {
-        Documento.find(function(err, docRes, count)
+        var visibles = '_id nombre usuario_crea fecha_crea fecha_modifica',
+            query = {$query: {}, $orderby: {fecha_modifica: -1}};
+        Documento.find(query, visibles, function(err, docRes, count)
         {
             res.json({
                 mensaje: "Encontrados " + docRes.length,
@@ -114,10 +117,11 @@
             }, 200);
         });
     });
-    
+
     router.get(dominio + '/documentos/:id', function(req, res, next)
     {
-        Documento.findById(req.params.id, function(err, docRes)
+        var visibles = '_id nombre plantilla plantilla_id componentes usuario_crea fecha_crea usuario_modifica fecha_modifica';
+        Documento.findById(req.params.id, visibles, function(err, docRes)
         {
             res.json({
                 mensaje: "Encontrado",
@@ -125,7 +129,7 @@
             }, 200);
         });
     });
-    
+
     router.post(dominio + '/documentos', function(req, res, next)
     {
         var comp = req.body.componentes;
@@ -147,7 +151,7 @@
             }, 201);
         });
     });
-    
+
     router.put(dominio + '/documentos/:id', function(req, res, next)
     {
         var comp = req.body.componentes;
@@ -167,10 +171,10 @@
             });
         });
     });
-    
-    
-    
-    
+
+
+
+
     /*++++++++++++++++++++++++++++++++++++++*/
     router.get('/', function(req, res, next) {
         res.render('index', {title: 'Titulo FFFFFF'});

@@ -23,7 +23,7 @@
 
         $rootScope.adecuarDocumentoParaGuardar = function(componentesPlantilla)
         {
-            var comp = componentes;
+            var comp = componentesPlantilla;
             for (i = 0; i < comp.length; i++)
             {
                 var item = comp[i];
@@ -34,37 +34,36 @@
                     var valor = angular.element(inputs[0]).val();
                     comp[i].campos.valor = valor;
                 }
-                else if(item.tipo === "seccion")
+                else if (item.tipo === "seccion")
                 {
                     var texts = angular.element("#" + item.id.toString()).find("textarea");
                     var contenido = angular.element(texts[0]).val();
-                    comp[i].campos.contenido = contenido;                    
+                    comp[i].campos.contenido = contenido;
                 }
-            }            
+            }
             return comp;
         };
         $rootScope.mostrarCampos = function(componentesDocumento)
         {
             var comp = componentesDocumento;
             console.log(comp);
-            for(i=0; i< comp.length; i++)
+            for (i = 0; i < comp.length; i++)
             {
                 var item = comp[i];
-                if(item.tipo === "metadato")
+                if (item.tipo === "metadato")
                 {
                     var inputs = angular.element("#" + item.id.toString()).find("input");
                     var valor = item.campos.valor;
                     angular.element(inputs[0]).val(valor);
                 }
-                else if(item.tipo === "seccion")
+                else if (item.tipo === "seccion")
                 {
                     var texts = angular.element("#" + item.id.toString()).find("textarea");
                     var contenido = item.campos.contenido;
-                    angular.element(texts[0]).val(contenido);                  
+                    angular.element(texts[0]).val(contenido);
                 }
             }
         };
 
-
-
     });
+
