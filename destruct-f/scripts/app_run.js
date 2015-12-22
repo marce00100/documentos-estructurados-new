@@ -20,6 +20,22 @@
             for (var i = 0; i < inputs.length; i++)
                 angular.element(inputs[i]).val("");
         };
+        $rootScope.colocaIdsComponentesPlantilla = function(plantillaComponentes, biblioteca)
+        {
+            var lista = plantillaComponentes;
+            var indice = [];
+            for (i = 0; i < biblioteca.length; i++)
+            {
+                indice[biblioteca[i].componente] = 1;
+            }
+            for (i = 0; i < lista.length; i++)
+            {
+                var item = lista[i];
+                item.id = item.componente + "-" + indice[item.componente].toString();
+                indice[item.componente] += 1;
+            }
+            return lista;
+        };
 
         $rootScope.adecuarDocumentoParaGuardar = function(componentesPlantilla)
         {

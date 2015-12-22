@@ -66,7 +66,6 @@
             $scope.modificaParametros = function()
             {
                 var parametros = $scope.componentes.seleccionado.parametros;
-                console.log(parametros);
                 for (var key in parametros)
                 {
                     parametros[key] = angular.element("#" + key).val();
@@ -76,7 +75,7 @@
 
             $scope.guardar = function()
             {
-                $scope.contexto.componentes = appFactory.colocaIdsComponentesPlantilla($scope.componentes.componentesPlantilla.lista, $scope.componentes.biblioteca);
+                $scope.contexto.componentes = $scope.colocaIdsComponentesPlantilla($scope.componentes.componentesPlantilla.lista, $scope.componentes.biblioteca);
                 if (typeof id === "undefined")
                 {
                     appFactory.restPlantillas.save($scope.contexto).$promise.then(function(respuesta)
