@@ -15,7 +15,8 @@
                          ng-class="item.tipo"
                          ng-include="'componentes/' + item.componente + '.html'" 
                          id="{{item.id}}" 
-                         ng-init="(item.tipo ==='metadato')? valor=item.campos.valor : contenido = item.campos.contenido"
+                         ng-init="(item.tipo ==='metadato')? campos=item.campos : campos = item.campos;
+                                     parametros = item.parametros"
                          >
                     </div>
                 </div>

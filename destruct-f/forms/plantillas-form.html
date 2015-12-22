@@ -4,7 +4,6 @@
         </div>
         <div class="col-md-8 col-xs-7">
             <input ng-model="contexto.nombre" placeholder="Plantilla sin nombre" style="width: 100%; font-size: 18pt; font-style: italic; ">
-
         </div>
         <div class="list-group-item col-md-3 col-xs-4">
             Plantilla vigente  
@@ -14,13 +13,10 @@
             </div>
         </div>
     </div>
-
     <div>
         <div id="contenidoPlantilla" class="container">
-            <h3 class="bg-success" style="padding: 5px 10px">Contenido:</h3>
-
-            <!-- ******************* DRAG N DROP ----------------------------------->
-            <div class="creacion-plantillaDemo row">
+            <!-- ******************* DRAG N DROP ***********************-->
+            <div class="creacion-plantillaDnd row">
                 <script type="text/ng-template" id="lista.html">
                     <div dnd-list="list" style="min-height: 200px">
                     <div ng-repeat="item in list"
@@ -28,6 +24,8 @@
                     dnd-effect-allowed="move"
                     dnd-moved="list.splice($index, 1)"
                     dnd-selected="componentes.seleccionado = item"
+                    ng-click="toggleModal()"
+                    ng-init="parametros=item.parametros"
                     ng-class="item.tipo"
                     ng-include="'componentes/'+ item.componente + '.html'">
                     </div>                
@@ -35,23 +33,22 @@
                 </script> 
 
                 <div class="col-xs-2">
-
                     <div class="toolbox box box-grey box-padding">
                         <h3>Componentes</h3>
-                        <ul>
-                            <li ng-repeat="item in componentes.biblioteca"
-                                dnd-draggable="item"
-                                dnd-effect-allowed="copy"
-                                dnd-copied="item.id = item.id + 1">
+                        <div>
+                            <div ng-repeat="item in componentes.biblioteca"
+                                 dnd-draggable="item"
+                                 dnd-effect-allowed="copy"
+                                 dnd-copied="item.id = item.id + 1">
                                 <span  class="btn btn-default btn-lg" >{{item.componente}}</span>
-                            </li>
-                        </ul>
+                            </div>
+                        </div>
                     </div>
                     <div class="trashcan box box-grey box-padding">
                         <h3>Eliminar elementos</h3>
-                        <ul dnd-list="[]">
-                            <li><img src="images/papelera.jpg"></li>
-                        </ul>
+                        <div dnd-list="[]">                            
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> 
+                        </div>
                     </div>
                 </div>
                 <div class="col-xs-10">
@@ -64,13 +61,31 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <h4><small>Descripción:</small></h4>
-                    <p><textarea ng-model="contexto.descripcion" placeholder="descripción" style="width:60%; height:50px;"></textarea></p>
-                </div>
+
+            </div>
+            <div class="row">
+                <h4><small>Descripción:</small></h4>
+                <p><textarea ng-model="contexto.descripcion" placeholder="descripción" style="width:60%; height:50px;"></textarea></p>
             </div>
             <button ng-click="guardar()" class="btn btn-success glyphicon glyphicon-ok"> <span>Guardar</span></button> 
             <a href="#/plantillas" class="btn btn-primary glyphicon glyphicon-home"> <span>Volver al inicio</span></a>
         </div>
     </div>
 </div>
+
+<modal title="Parámetros" visible="showModal">
+    <div class="form-group">
+        <table>
+            <tr ng-repeat="(key, val) in componentes.seleccionado.parametros">
+                <td>
+                    <label>{{key}}</label>
+                </td>
+                <td>                    
+                    <input type="text" class="form-control" id="{{key}}" placeholder="{{key}}" ng-model="val">
+                </td>                
+            </tr>
+        </table>
+    </div>
+    <button ng-click="modificaParametros()" class="btn btn-default ">Aceptar</button>
+
+</modal>
