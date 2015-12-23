@@ -43,11 +43,7 @@
                 }
             };
 
-            ////////modal 
-            $scope.showModal = false;
-            $scope.toggleModal = function() {
-                $scope.showModal = !$scope.showModal;
-            };
+
 
             var id = $routeParams.id;
             if (typeof id === "undefined")
@@ -63,6 +59,10 @@
                 });
             }
 
+            $scope.showModal = false;
+            $scope.toggleModal = function() {
+                $scope.showModal = !$scope.showModal;
+            };
             $scope.modificaParametros = function()
             {
                 var parametros = $scope.componentes.seleccionado.parametros;
@@ -145,7 +145,7 @@
     .controller('documentosNuevoCtrl', ['$scope', 'appFactory', '$resource', '$routeParams', '$rootScope', function($scope, appFactory, $resource, $routeParams, $rootScope)
         {
             $scope.modulo = 3;
-            appFactory.colocarSubtitulo("Documento Nuevo");
+            appFactory.colocarSubtitulo("Documento");
             $scope.contexto = {};
             var idP = $routeParams.id;
             $resource(appFactory.dominio + "/plantillas/" + idP).get(function(plantillaRes) {
@@ -154,23 +154,24 @@
                 $scope.contexto.componentes = plantillaRes.plantilla.componentes;
             });
 
-
+//            $rootScope.editorSecciones();
             $scope.guardar = function()
             {
-                $scope.contexto.componentes = $rootScope.adecuarDocumentoParaGuardar($scope.contexto.componentes);
-                appFactory.restDocumentos.save($scope.contexto).$promise.then(function(respuesta)
-                {
-                    if (respuesta.mensaje) {
-                        appFactory.irA("/documentos/" + respuesta.documento._id + "/editar/");
-                    }
-                });
+//                $rootScope.editorSecciones();
+//                $scope.contexto.componentes = $rootScope.adecuarDocumentoParaGuardar($scope.contexto.componentes);
+//                appFactory.restDocumentos.save($scope.contexto).$promise.then(function(respuesta)
+//                {
+//                    if (respuesta.mensaje) {
+//                        appFactory.irA("/documentos/" + respuesta.documento._id + "/editar/");
+//                    }
+//                });
             };
         }])
 
     .controller('documentosEditarCtrl', ['$scope', 'appFactory', '$rootScope', '$routeParams', function($scope, appFactory, $rootScope, $routeParams)
         {
             $scope.modulo = 3;
-            appFactory.colocarSubtitulo("Modificar Documento");
+            appFactory.colocarSubtitulo("Documento");
             $scope.contexto = {};
             var id = $routeParams.id;
 

@@ -15,54 +15,56 @@ and open the template in the editor.
     <body>
         <script>
 
-
-
-
                 $(function() {
 
-                    var divs = $("#contenedor").find('div');
 
-
-
+                    var divs = $("#editorDocumento").find(".editorTexto");
                     bkLib.onDomLoaded(function() {
-                        var ne = new nicEditor();
+                        var nic = new nicEditor();
                         for (var i = 0; i < divs.length; i++)
                         {
                             var id = $(divs[i]).attr('id');
-                            ne.addInstance(id);
+                            nic.addInstance(id);
                         }
-                        ne.floatingPanel();
-
+                        nic.floatingPanel();
                     });
 
 
+//                    var divs = $("#contenedor").find('.editor');
+//
+//                    bkLib.onDomLoaded(function() {
+//                        var ne = new nicEditor();
+//                        for (var i = 0; i < divs.length; i++)
+//                        {
+//                            var id = $(divs[i]).attr('id');
+//                            ne.addInstance(id);
+//                        }
+//                        ne.floatingPanel();
+//                    });
 
                     $("#btnVer").click(function()
                     {
                         var contenido = "";
                         for (var i = 0; i < divs.length; i++)
                         {
-                            contenido  += $(divs[i]).html() + "<br>=============================<br>";
-                            
+                            contenido += $(divs[i]).html() + "<br>=============================<br>";
                         }
-
 
                         $("#html").html(contenido);
                     });
-
-
                 });
 
         </script>
-        <div id="contenedor">
+        <div id="editorDocumento">
 
             Introduccion
-            <div id="div1" >ssss</div>
+            <div id="div1" style="border: 1px solid grey; height: 80px" class="editorTexto group" >ssss</div>
             Contenido
-            <div id="div2" ></div>
-
+            <div id="div2" style="border: 1px solid grey; height: 80px" class="box-blue"></div>
             Conclusion
-            <div id="div3" ></div>
+            <div id="div3" style="border: 1px solid grey; height: 80px" class="box-yellow editorTexto"></div>
+            Anexos
+            <div id="div4" style="border: 1px solid grey; height: 80px"></div>
 
             <button id="btnVer">ver </button>
 

@@ -1,4 +1,12 @@
 
+.metadato, .seccion{
+    border-bottom: 1px #eee solid;
+}
+
+.editorTexto{
+    min-height: 80px;
+    border: 1px solid grey;
+}
 /* ===================================  Propios ======================*/
 
 body{
@@ -8,6 +16,7 @@ body{
         width: 100%;
         min-height: 100%;
 }
+
 
 /*.glyphicon{
     font-family: "Segoe UI", "Tahoma", "Calibri", arial, sans-serif ;}  */

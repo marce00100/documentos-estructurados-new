@@ -1,18 +1,18 @@
     biblioteca = [
         {
-            nombre:"Título",
+            nombre: "Título",
             componente: "titulo",
             tipo: "metadato",
             descripcion: "Títulos que se pueden poner en la plantilla",
             icono: "componentes/img/text_titulo.png",
             parametros: {
                 titulo: "",
-                alineacion:"",
+                alineacion: "",
                 nivel: ""
             }
         },
         {
-            nombre:"Texto",
+            nombre: "Texto",
             componente: "texto",
             tipo: "metadato",
             descripcion: "texto fijo en la plantilla",
@@ -22,7 +22,7 @@
             }
         },
         {
-            nombre:"Campo",
+            nombre: "Campo",
             componente: "input",
             tipo: "metadato",
             descripcion: "Campo de texto etiqueta con un valor de entrada",
@@ -34,7 +34,7 @@
             }
         },
         {
-            nombre:"Sección",
+            nombre: "Sección",
             componente: "textarea",
             tipo: "seccion",
             descripcion: "Título con espacio de texto para edición",

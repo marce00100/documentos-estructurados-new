@@ -9,13 +9,13 @@
         </div>
         <div id="contenidoDocumento" class="container" >
             <div class="row">
-                <div id="editorDocumento" class="txtEditor creacion-plantillaDemo row"  style="width:21.6cm;  height:8cm; overflow:auto; border:1px solid gray; ">
+                <div id="editorDocumento" class="txtEditor creacion-plantillaDnd row"  style="width:21.6cm;  height:8cm; overflow:auto; border:1px solid gray; ">
 
                     <div ng-repeat="item in contexto.componentes"
                          ng-class="item.tipo"
                          ng-include="'componentes/' + item.componente + '.html'" 
                          id="{{item.id}}" 
-                         ng-init="(item.tipo ==='metadato')? campos=item.campos : campos = item.campos;
+                         ng-init="(item.tipo ==='metadato')? campos = item.campos : campos = item.campos;
                                      parametros = item.parametros"
                          >
                     </div>
